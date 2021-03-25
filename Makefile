@@ -5,26 +5,26 @@ webexec := $(exec)
 rwebexec := $(exec) --user root
 
 status:
-        $(dc) ps
+	$(dc) ps
 
 up:
-        $(dc) up -d
+	$(dc) up -d
 
 stop:
-        $(dc) stop
+	$(dc) stop
 
 down:
-        $(dc) down
+	$(dc) down
 
 restart:
-        $(dc) restart
+	$(dc) restart
 
 sh:
-        $(webexec) app /bin/sh
+	$(webexec) app /bin/sh
 
 rsh:
-        $(rwebexec) app /bin/sh
+	$(rwebexec) app /bin/sh
 
 check:
-        $(webexec) composer check-style
-        $(webexec) composer check-smell
+	$(webexec) composer check-style
+	$(webexec) composer check-smell
