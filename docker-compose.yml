@@ -14,24 +14,24 @@ services:
             - ../:/var/www/html
         environment:
             - APP_FASTCGI_URI=app:9000
-            - APP_DOMAIN=rankill.local
+            - APP_DOMAIN=${APPLICATION_NAME:-phpimage}.local
         ports:
             - "80:80"
     db:
         image: postgres:13
         environment:
-            POSTGRES_PASSWORD: rankill
-            POSTGRES_USER: rankill
-            POSTGRES_DB: rankill
+            POSTGRES_PASSWORD: ${APPLICATION_NAME:-phpimage}
+            POSTGRES_USER: ${APPLICATION_NAME:-phpimage}
+            POSTGRES_DB: ${APPLICATION_NAME:-phpimage}
             TZ: "UTC"
         volumes:
-            - rankilldbdata:/var/lib/postgresql/data
+            - dbdata:/var/lib/postgresql/data
         networks:
             default:
                 ipv4_address: ${IP_PREFIX}.3
 
 volumes:
-    rankilldbdata:
+    dbdata:
         driver: local
 
 networks:
