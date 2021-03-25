@@ -1,4 +1,6 @@
 prefix := $(basename $(notdir $(CURDIR)))
+uid := $(shell id -u)
+gid := $(shell id -g)
 dc := docker-compose --env-file=$(CURDIR)/.env -f phpimage/docker-compose.yml -p $(prefix)
 exec := $(dc) exec
 webexec := $(exec)
@@ -8,6 +10,7 @@ status:
 	$(dc) ps
 
 up:
+	$(dc) build --build-arg PGID=$(gid) --build-arg PUID=$(uid)
 	$(dc) up -d
 
 stop:
@@ -35,3 +38,6 @@ logs:
 
 destroy:
 	$(dc) down -v --remove-orphans
+
+amir:
+	$(gid)
