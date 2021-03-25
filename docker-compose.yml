@@ -17,7 +17,7 @@ services:
             - APP_DOMAIN=${APPLICATION_NAME:-phpimage}.local
         networks:
             default:
-                ipv4_address: ${IP_PREFIX}.3
+                ipv4_address: ${IP_PREFIX}.2
     db:
         image: postgres:13
         environment:
