@@ -1,4 +1,4 @@
-dc := docker-compose
+dc := docker-compose -f ./phpimage/docker-compose.yml
 exec := $(dc) exec
 webexec := $(exec)
 rwebexec := $(exec) --user root
