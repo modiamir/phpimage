@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        volumes:
+            - ../:/var/www/html
+    nginx:
+        image: nginx:1.19-alpine
+        volumes:
+            - ./docker/nginx/templates:/etc/nginx/templates
+            - ../:/var/www/html
+        environment:
+            - APP_FASTCGI_URI=app:9000
+            - APP_DOMAIN=rankill.local
+        ports:
+            - "80:80"
+    db:
+        image: postgres:13
+        environment:
+            POSTGRES_PASSWORD: rankill
+            POSTGRES_USER: rankill
+            POSTGRES_DB: rankill
+            TZ: "UTC"
+        volumes:
+            - rankilldbdata:/var/lib/postgresql/data
+        networks:
+            default:
+                ipv4_address: ${IP_PREFIX}.3
+
+volumes:
+    rankilldbdata:
+        driver: local
+
+networks:
+    default:
+        ipam:
+            driver: default
+            config:
+                - subnet: ${IP_PREFIX}.0/24
