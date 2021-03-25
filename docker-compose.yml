@@ -15,8 +15,9 @@ services:
         environment:
             - APP_FASTCGI_URI=app:9000
             - APP_DOMAIN=${APPLICATION_NAME:-phpimage}.local
-        ports:
-            - "80:80"
+        networks:
+            default:
+                ipv4_address: ${IP_PREFIX}.3
     db:
         image: postgres:13
         environment:
