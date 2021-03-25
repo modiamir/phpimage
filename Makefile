@@ -28,3 +28,10 @@ rsh:
 check:
 	$(webexec) composer check-style
 	$(webexec) composer check-smell
+
+logs:
+	$(dc) logs -f --tail 100
+
+
+destroy:
+	$(dc) down -v --remove-orphans

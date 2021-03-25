@@ -7,6 +7,10 @@ services:
             dockerfile: docker/php/Dockerfile
         volumes:
             - ../:/var/www/html
+        networks:
+            default:
+                ipv4_address: ${IP_PREFIX}.4
+
     nginx:
         image: nginx:1.19-alpine
         volumes:
